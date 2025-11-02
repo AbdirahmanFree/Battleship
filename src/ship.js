@@ -1,8 +1,8 @@
 class Ship {
-    constructor(length,hit,sunk = false){
+    constructor(length,hit){
         this.length = length
         this.hit = hit
-        this.sunk = sunk
+        this.sunk = false
     }
 
     shipHit(){
@@ -11,9 +11,9 @@ class Ship {
 
     isSunk(){
         if(this.hit >= this.length){
-            return true
+            this.sunk = true
         }
-        return false
+        return this.sunk
     }
 }
 
