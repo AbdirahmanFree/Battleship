@@ -10,14 +10,21 @@ class GameBoard {
         return true
     }
 
-    seperatePostions(position){
+    isValidPosition(position){
+        if(position.length >5 || position.length < 2){
+            return false
+        }
         let xPositions = []
         let yPositions = []
         for (let pos of position){
             xPositions.push(pos[0])
             yPositions.push(pos[1])
         }
-        return (xPositions,yPositions)
+        // position is valid if every x is the same and all the y's increment or  decrement by one. Vice  Versa
+        if ((allSame(xPositions) && sequence(yPositions)) || (allSame(yPositions) && sequence(xPositions) )){
+            return true
+        }
+        return false
 
     }
 
