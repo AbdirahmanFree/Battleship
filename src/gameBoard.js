@@ -27,6 +27,15 @@ class GameBoard {
         return false
 
     }
+    allSame(array){
+        if (array.length == 1){
+            return true
+        }
+        if(array[0] == array[1]){
+            return this.allSame(array.slice(1))
+        }
+        return false
+    }
 
     
 }

@@ -7,7 +7,11 @@ test('checking gameBoard dimensions', () => {
     expect(board.board[4][7]).toBe(null)
 })
 
-test('test speratePositions helper', ()=> {
+
+test('allSame function test', ()=> {
     const board = new GameBoard()
-    expect(board.seperatePostions([[0,0],[0,1],[0,2],[0,3],[0,4]])).toEqual((([0,0,0,0,0],[0,1,2,3,4])))
+    expect(board.allSame([1,2,3,4])).toBe(false)
+    expect(board.allSame([1,1,1,3])).toBe(false)
+    expect(board.allSame([1])).toBe(true)
+    expect(board.allSame([1,1,1,1])).toBe(true)
 })
