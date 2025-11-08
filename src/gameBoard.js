@@ -20,8 +20,11 @@ class GameBoard {
             xPositions.push(pos[0])
             yPositions.push(pos[1])
         }
+        if(!this.inBounds(xPositions) || !this.inBounds(yPositions)){
+            return false
+        }
         // position is valid if every x is the same and all the y's increment or  decrement by one. Vice  Versa
-        if ((allSame(xPositions) && sequence(yPositions)) || (allSame(yPositions) && sequence(xPositions) )){
+        if ((this.allSame(xPositions) && this.sequence(yPositions)) || (this.allSame(yPositions) && this.sequence(xPositions) )){
             return true
         }
         return false
@@ -62,6 +65,15 @@ class GameBoard {
             return true
         }
         return false
+    }
+
+    inBounds(array){
+        for (let pos of array){
+            if (pos >9 || pos < 0){
+                return false
+            }
+        }
+        return true
     }
     
 
