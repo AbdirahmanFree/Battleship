@@ -37,6 +37,34 @@ class GameBoard {
         return false
     }
 
+    sequence(array){
+        if(array.length <=1){
+            return true
+        }
+
+        // increasing sequence
+        if(array[0] == (array[1] -1)){
+            for(let i = 1; i< array.length; i++){
+                if (array[i] != array[i-1] +1){
+                    return false
+                }
+            }
+            return true
+        }
+
+        //decreaseing sequence
+        if(array[0] == (array[1] +1)){
+            for(let i = 1; i< array.length; i++){
+                if (array[i] != array[i-1] -1){
+                    return false
+                }
+            }
+            return true
+        }
+        return false
+    }
+    
+
     
 }
 
