@@ -55,6 +55,7 @@ describe('testing is valid position', () =>{
         expect(board.isValidPosition([[0,0],[1,0],[2,0]])).toBe(true)
         expect(board.isValidPosition([[3,0],[2,0],[1,0]])).toBe(true)
         expect(board.isValidPosition([[3,1],[3,2],[3,4]])).toBe(false)
+        expect(board.isValidPosition([[0,0],[1,0]])).toBe(true)
     })
     test('to few positions check', () => {
         expect(board.isValidPosition([[0,0]])).toBe(false)
@@ -82,6 +83,22 @@ describe('testing inBounds function', () => {
 describe('adjacent positions function', () => {
     const board = new GameBoard()
     test('horizontal ship', () => {
-        expect(board.adjacent([[0,0],[0,1]])).toEqual([[1,0],[1,1],[2,0],[2,1]])
+        expect(board.adjacent([[0,0],[1,0]])).toEqual([[1,0],[1,1],[2,0],[2,1]])
+    })
+})
+
+describe('horizontal function', () => {
+    const board = new GameBoard()
+    test('2 position ship', () => {
+        expect(board.horizontal([[0,0],[1,0]])).toEqual(true)
+        expect(board.horizontal([[6,3],[7,3]])).toBe(true)
+        expect(board.horizontal([[6,3],[6,4]])).toBe(false)
+        
+    })
+    test('larger ships', () => {
+        expect(board.horizontal([[6,3],[7,3],[8,3]])).toBe(true)
+        expect(board.horizontal([[5,3],[6,3],[7,3],[8,3]])).toBe(true)
+        expect(board.horizontal([[5,3],[6,3],[7,3],[9,3]])).toBe(false)
+        expect(board.horizontal([[5,3],[6,3],[7,3],[8,3],[9,3]])).toBe(true)
     })
 })
