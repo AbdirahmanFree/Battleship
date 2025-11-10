@@ -14,7 +14,10 @@ class GameBoard {
 
     adjacent(grid){
         let adjacent = []
-        return [[1,0],[1,1],[2,0],[2,1]]
+        if(this.vertical(grid)){
+            ///
+           
+        }
     }
 
     horizontal(grid){
