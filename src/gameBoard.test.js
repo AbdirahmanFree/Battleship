@@ -102,3 +102,16 @@ describe('horizontal function', () => {
         expect(board.horizontal([[5,3],[6,3],[7,3],[8,3],[9,3]])).toBe(true)
     })
 })
+
+describe('vertical function', () => {
+    const board = new GameBoard()
+    test('2 position ship', () => {
+        expect(board.vertical([[0,0],[0,1]])).toEqual(true)
+        expect(board.vertical([[6,3],[6,4]])).toBe(true)
+        expect(board.vertical([[6,3],[7,3]])).toBe(false)
+    })
+    test('larger ships', () => {
+        expect(board.vertical([[3,2], [3,3], [3,4]])).toBe(true)
+        
+    })
+})

@@ -24,6 +24,13 @@ class GameBoard {
         return false
     }
 
+    vertical(grid){
+        if((grid[0][0] == grid[1][0]) && this.isValidPosition(grid)){
+            return true
+        }
+        return false
+    }
+
 
 
     isValidPosition(position){
