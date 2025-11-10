@@ -2,13 +2,22 @@ import {Ship} from "./ship"
 class GameBoard {
     constructor(){
         this.board = new Array(10).fill(new Array(10).fill(null))
+        this.coordinates = {}
     }
     placeShip(position){
         if(!isValidPosition(position)){
             return false
         }
         return true
+
     }
+
+    adjacent(grid){
+        let adjacent = []
+        return [[1,0],[1,1],[2,0],[2,1]]
+    }
+    
+
 
     isValidPosition(position){
         if(position.length >5 || position.length < 2){

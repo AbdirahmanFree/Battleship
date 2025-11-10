@@ -78,3 +78,10 @@ describe('testing inBounds function', () => {
         expect(board.inBounds([0,1,-12,3,4])).toBe(false)
     })
 })
+
+describe('adjacent positions function', () => {
+    const board = new GameBoard()
+    test('horizontal ship', () => {
+        expect(board.adjacent([[0,0],[0,1]])).toEqual([[1,0],[1,1],[2,0],[2,1]])
+    })
+})
