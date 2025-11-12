@@ -96,3 +96,10 @@ describe('adjacent function', () => {
         expect(board.adjacent([[9,0],[9,1],[9,2]])).toEqual(board.sort([[8,0],[8,1],[8,2],[8,3],[9,3]]))
     })
 })
+
+describe('place ship function', () => {
+    const board = new GameBoard()
+    test('warm up', () => {
+        expect(board.placeShip([[0,1],[0,2]])).toEqual(true)
+    })
+})

@@ -5,10 +5,22 @@ class GameBoard {
         this.coordinates = {}
     }
     placeShip(position){
-        if(!isValidPosition(position)){
+        
+        if(!(this.isValidPosition(position))){
             return false
         }
-        return true
+        const ship = new Ship(position.length)
+        const adj = this.adjacent(position)
+        for(let [x,y] of position){
+            this.board[x][y] =ship
+            const key = `${x},${y}`
+            this.coordinates[key] = ship
+
+        }
+        for(let [x,y] of adj){
+            this.board[x][y] = "X"
+            
+        }
 
     }
 
@@ -20,18 +32,18 @@ class GameBoard {
         }
         const seen = {}
         const out = [];
-        for(const [r,c] of grid){
-            for(let dr = -1; dr <= 1; dr++){
-                for(let dc =-1; dc <= 1; dc ++){
-                    if(dr == 0 && dc ==0) continue;
-                    const nr = r +dr;
-                    const nc = c  + dc;
-                    const key = `${nr},${nc}`;
-                    if (!(this.inBounds([nr, nc]))) continue;   
+        for(const [x,y] of grid){
+            for(let dx = -1; dx <= 1; dx++){
+                for(let dy =-1; dy <= 1; dy ++){
+                    if(dx == 0 && dy ==0) continue;
+                    const nx = x +dx;
+                    const ny = y  + dy;
+                    const key = `${nx},${ny}`;
+                    if (!(this.inBounds([nx, ny]))) continue;   
                     if(key in shipSet)  continue;
                     if(key in seen) continue;
                     seen[key] = 1
-                    out.push([nr,nc]);
+                    out.push([nx,ny]);
                 }
             }
         }
