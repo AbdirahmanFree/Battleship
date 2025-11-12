@@ -15,10 +15,33 @@ class GameBoard {
     adjacent(grid){
         let adjacent = []
         if(this.vertical(grid)){
-            ///
+            
+            
            
         }
     }
+
+    ascendingY(grid){
+        if(this.isValidPosition(grid) && this.vertical(grid)){
+            if(grid[0][1] > grid[1][1]){
+                return true
+            }
+            return false
+        }
+        return false
+    }
+
+    ascendingX(grid){
+        if(this.isValidPosition(grid) && this.horizontal(grid)){
+            if(grid[0][0] > grid[1][0]){
+                return true
+            }
+            return false
+        }
+        return false
+    }
+
+
 
     horizontal(grid){
         if((grid[0][1] == grid[1][1]) && this.isValidPosition(grid)){

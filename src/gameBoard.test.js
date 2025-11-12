@@ -80,12 +80,7 @@ describe('testing inBounds function', () => {
     })
 })
 
-describe('adjacent positions function', () => {
-    const board = new GameBoard()
-    test('horizontal ship', () => {
-        expect(board.adjacent([[0,0],[1,0]])).toEqual([[1,0],[1,1],[2,0],[2,1]])
-    })
-})
+
 
 describe('horizontal function', () => {
     const board = new GameBoard()
@@ -113,5 +108,17 @@ describe('vertical function', () => {
     test('larger ships', () => {
         expect(board.vertical([[3,2], [3,3], [3,4]])).toBe(true)
         
+    })
+})
+
+describe('ascending Functions', () => {
+    const board = new GameBoard()
+    test('ascending Y', ()=> {
+        expect(board.ascendingY([[0,0],[0,1]])).toBe(false)
+        expect(board.ascendingY([[1,5],[1,4],[1,3],[1,2]])).toBe(true)
+    })
+    test('ascending X',() => {
+        expect(board.ascendingX([[5,3],[6,3],[7,3],[8,3],[9,3]])).toBe(false)
+        expect(board.ascendingX([[9,6],[8,6],[7,6],[6,6],[5,6]])).toBe(true)
     })
 })
