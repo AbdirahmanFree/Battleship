@@ -42,44 +42,7 @@ class GameBoard {
         return grid.sort(([a,b],[c,d]) => (a -c) || (b-d));
     }
 
-    ascendingY(grid){
-        if(this.isValidPosition(grid) && this.vertical(grid)){
-            if(grid[0][1] > grid[1][1]){
-                return true
-            }
-            return false
-        }
-        return false
-    }
-
-    ascendingX(grid){
-        if(this.isValidPosition(grid) && this.horizontal(grid)){
-            if(grid[0][0] > grid[1][0]){
-                return true
-            }
-            return false
-        }
-        return false
-    }
-
-
-
-    horizontal(grid){
-        if((grid[0][1] == grid[1][1]) && this.isValidPosition(grid)){
-            return true
-        }
-        return false
-    }
-
-    vertical(grid){
-        if((grid[0][0] == grid[1][0]) && this.isValidPosition(grid)){
-            return true
-        }
-        return false
-    }
-
-
-
+   
     isValidPosition(position){
         if(position.length >5 || position.length < 2){
             return false
