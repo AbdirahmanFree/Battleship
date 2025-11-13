@@ -1,27 +1,34 @@
 import {Ship} from "./ship"
 class GameBoard {
     constructor(){
-        this.board = new Array(10).fill(new Array(10).fill(null))
+        this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
         this.coordinates = {}
     }
     placeShip(position){
         
-        if(!(this.isValidPosition(position))){
-            return false
-        }
+        if(!(this.isValidPosition(position)))return false;
+            
+        
         const ship = new Ship(position.length)
         const adj = this.adjacent(position)
-        for(let [x,y] of position){
-            this.board[x][y] =ship
-            const key = `${x},${y}`
+
+        
+        for(let [r,c] of adj){
+            const key = `${r},${c}`
+            if(key in this.coordinates) return false
+            else this.board[r][c] = "X";
+            
+        }
+         for(let [r,c] of position){
+            const key = `${r},${c}`
+            if(key in this.coordinates) return false
+            if(this.board[r][c] != null) return false
+
+            this.board[r][c] =ship
             this.coordinates[key] = ship
 
         }
-        for(let [x,y] of adj){
-            this.board[x][y] = "X"
-            
-        }
-
+        return true
     }
 
     adjacent(grid){
@@ -32,18 +39,18 @@ class GameBoard {
         }
         const seen = {}
         const out = [];
-        for(const [x,y] of grid){
-            for(let dx = -1; dx <= 1; dx++){
-                for(let dy =-1; dy <= 1; dy ++){
-                    if(dx == 0 && dy ==0) continue;
-                    const nx = x +dx;
-                    const ny = y  + dy;
-                    const key = `${nx},${ny}`;
-                    if (!(this.inBounds([nx, ny]))) continue;   
+        for(const [r,c] of grid){
+            for(let dr = -1; dr <= 1; dr++){
+                for(let dc =-1; dc <= 1; dc ++){
+                    if(dr == 0 && dc ==0) continue;
+                    const nr = r + dr;
+                    const nc = c + dc;
+                    const key = `${nr},${nc}`;
+                    if (nr < 0 || nc < 0 || nr > 9 || nc > 9) continue;   
                     if(key in shipSet)  continue;
                     if(key in seen) continue;
                     seen[key] = 1
-                    out.push([nx,ny]);
+                    out.push([nr,nc]);
                 }
             }
         }
@@ -59,17 +66,17 @@ class GameBoard {
         if(position.length >5 || position.length < 2){
             return false
         }
-        let xPositions = []
-        let yPositions = []
-        for (let pos of position){
-            xPositions.push(pos[0])
-            yPositions.push(pos[1])
-        }
-        if(!this.inBounds(xPositions) || !this.inBounds(yPositions)){
-            return false
+        let rows = []
+        let columns = []
+        for (let [r,c] of position){
+            //check if position on board is taken
+            if(r > 9 || c > 9 || r < 0 || c < 0) return false;
+            if(this.board[r][c] != null) return false;
+            rows.push(r)
+            columns.push(c)
         }
         // position is valid if every x is the same and all the y's increment or  decrement by one. Vice  Versa
-        if ((this.allSame(xPositions) && this.sequence(yPositions)) || (this.allSame(yPositions) && this.sequence(xPositions) )){
+        if ((this.allSame(rows) && this.sequence(columns)) || (this.allSame(columns) && this.sequence(rows) )){
             return true
         }
         return false
@@ -90,37 +97,16 @@ class GameBoard {
             return true
         }
 
-        // increasing sequence
-        if(array[0] == (array[1] -1)){
-            for(let i = 1; i< array.length; i++){
-                if (array[i] != array[i-1] +1){
-                    return false
-                }
-            }
-            return true
-        }
+        const sorted = [...array].sort((a,b) =>  a-b)
 
-        //decreaseing sequence
-        if(array[0] == (array[1] +1)){
-            for(let i = 1; i< array.length; i++){
-                if (array[i] != array[i-1] -1){
-                    return false
-                }
-            }
-            return true
-        }
-        return false
-    }
-
-    inBounds(array){
-        for (let pos of array){
-            if (pos >9 || pos < 0){
+        for(let i = 1; i< sorted.length; i++){
+            if (sorted[i] != sorted[i-1] +1){
                 return false
             }
         }
         return true
     }
-    
+
 
     
 }
