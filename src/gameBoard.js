@@ -28,7 +28,14 @@ class GameBoard {
             this.coordinates[key] = ship
 
         }
+        // Call display controller to display ships at the position coordinates
+
+        
         return true
+    }
+   allShipsSunk() {
+    return Object.keys(this.coordinates).length === 0;
+    // trigger end game
     }
 
     recieveAttack(position){
@@ -37,9 +44,12 @@ class GameBoard {
             this.coordinates[key].shipHit()
             delete this.coordinates[key]
             this.board[position[0]][position[1]] = "H"
+            //do an if statement to end the game here
+            this.allShipsSunk()
             return "HIT"
         }
         return "MISS"
+        // Here call display controller to mark as missed//
     }
 
     adjacent(grid){
@@ -80,13 +90,12 @@ class GameBoard {
         let rows = []
         let columns = []
         for (let [r,c] of position){
-            //check if position on board is taken
+            
             if(r > 9 || c > 9 || r < 0 || c < 0) return false;
             if(this.board[r][c] != null) return false;
             rows.push(r)
             columns.push(c)
         }
-        // position is valid if every x is the same and all the y's increment or  decrement by one. Vice  Versa
         if ((this.allSame(rows) && this.sequence(columns)) || (this.allSame(columns) && this.sequence(rows) )){
             return true
         }
