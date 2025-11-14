@@ -94,3 +94,14 @@ describe('place ship function', ()=> {
         expect(board.placeShip([[1,0],[1,1]])).toBe(false)
     })
 })
+
+describe('recieve hit function', () => {
+    const board = new GameBoard()
+    test('hitting ship', () => {
+        expect(board.placeShip([[0,0],[0,1]])).toBe(true)
+        expect(board.recieveAttack([5,5])).toEqual("MISS")
+        expect(board.recieveAttack([0,0])).toEqual("HIT")
+        expect(board.recieveAttack([0,0])).toEqual("MISS")
+        
+    })
+})

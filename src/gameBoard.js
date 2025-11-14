@@ -31,6 +31,17 @@ class GameBoard {
         return true
     }
 
+    recieveAttack(position){
+        const key = `${position[0]},${position[1]}`
+        if(key in this.coordinates){
+            this.coordinates[key].shipHit()
+            delete this.coordinates[key]
+            this.board[position[0]][position[1]] = "H"
+            return "HIT"
+        }
+        return "MISS"
+    }
+
     adjacent(grid){
         const shipSet = {};
         for (let i = 0; i < grid.length; i++){
