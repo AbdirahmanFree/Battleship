@@ -26,10 +26,19 @@ body {
 }
 
 .grid {
-    border: 1px solid black;
     width: 500px;
     height: 500px;
     display: grid;
     grid-template-columns: repeat(11,1fr);
     grid-template-rows: repeat(11,1fr);
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square {
+    border: 1px solid black;
 }
