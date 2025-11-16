@@ -22,6 +22,7 @@ for(let i = 2; i < 12; i++){
     computerGrid.appendChild(cellRC)
 }
 
+//add square cells
 for(let r = 2; r <12; r++){
     for (let c = 2; c < 12; c++){
         const square = document.createElement('div')
@@ -34,5 +35,9 @@ for(let r = 2; r <12; r++){
         computerGrid.appendChild(squareC)
     }
 }
+
+export{userGrid ,computerGrid}
+
+
 
 
